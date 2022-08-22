@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Авг 22 2022 г., 15:12
+-- Время создания: Авг 22 2022 г., 17:53
 -- Версия сервера: 5.7.33-log
 -- Версия PHP: 8.0.8
 
@@ -74,30 +74,6 @@ INSERT INTO `category` (`id`, `parent_id`, `name`, `keywords`, `description`) VA
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `contact`
---
-
-CREATE TABLE `contact` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `subject` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `text` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Дамп данных таблицы `contact`
---
-
-INSERT INTO `contact` (`id`, `name`, `email`, `subject`, `text`, `date`) VALUES
-(1, 'Rus', 'rus@mail.ru', 'About', 'My message', '2022-08-17 19:37:58'),
-(2, 'Rus', 'rus@mail.ru', 'About', 'about', '2022-08-17 20:38:56'),
-(3, 'Rus', 'rus@mail.ru', 'About', 'dsadsa', '2022-08-17 20:42:30');
-
--- --------------------------------------------------------
-
---
 -- Структура таблицы `image`
 --
 
@@ -140,112 +116,6 @@ INSERT INTO `image` (`id`, `filePath`, `itemId`, `isMain`, `modelName`, `urlAlia
 (31, 'Products/Product12/eb4318.jpg', 12, NULL, 'Product', 'b133534cfb-2', ''),
 (32, 'Products/Product12/68afa6.jpg', 12, NULL, 'Product', 'a4700d358a-3', ''),
 (33, 'Products/Product12/517c9b.jpg', 12, NULL, 'Product', '1f76f33011-4', '');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `migration`
---
-
-CREATE TABLE `migration` (
-  `version` varchar(180) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `apply_time` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Дамп данных таблицы `migration`
---
-
-INSERT INTO `migration` (`version`, `apply_time`) VALUES
-('m000000_000000_base', 1660401147),
-('m140622_111540_create_image_table', 1660401148),
-('m140622_111545_add_name_to_image_table', 1660401148);
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `order`
---
-
-CREATE TABLE `order` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
-  `qty` int(10) NOT NULL,
-  `sum` float NOT NULL,
-  `status` enum('0','1') NOT NULL DEFAULT '0',
-  `name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `phone` varchar(255) NOT NULL,
-  `address` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `order`
---
-
-INSERT INTO `order` (`id`, `created_at`, `updated_at`, `qty`, `sum`, `status`, `name`, `email`, `phone`, `address`) VALUES
-(16, '2022-08-08 22:23:32', '2022-08-17 21:41:23', 7, 400, '0', 'Рус', '456465@naul.ru', '321123', 'ST'),
-(17, '2022-08-08 22:25:02', '2022-08-08 22:25:02', 11, 480, '0', 'Рус', '456465@naul.ru', '90909', '29 ST'),
-(18, '2022-08-09 01:20:12', '2022-08-09 01:20:12', 3, 156, '0', 'Рус', '70@inbox.ru', '9999999', 'NY, 29'),
-(19, '2022-08-09 01:21:39', '2022-08-17 21:42:13', 2, 100, '0', 'Рус', 'russ@mail.ru', '90909', 'myaddress'),
-(20, '2022-08-09 01:26:48', '2022-08-09 01:26:48', 2, 100, '1', 'Рус', '70@inbox.ru', '90909', 'NY, 29'),
-(21, '2022-08-09 01:28:31', '2022-08-09 01:28:31', 2, 100, '0', 'Рус', '70@inbox.ru', '90909', 'NY, 29'),
-(22, '2022-08-09 01:30:01', '2022-08-09 01:30:01', 2, 100, '0', 'Рус', '3@inbox.ru', '90909', '29 ST'),
-(23, '2022-08-09 01:31:01', '2022-08-09 01:31:01', 2, 100, '0', 'Рус', 'r70@inbox.ru', '90909', '29 ST'),
-(24, '2022-08-09 01:32:12', '2022-08-09 01:32:12', 2, 126, '0', 'Рус', '456465@naul.ru', 'dsadas', 'nystreet'),
-(25, '2022-08-10 21:19:46', '2022-08-10 21:19:46', 1, 20, '0', 'Рус', 'r4213170@inbox.ru', '9090', '29 ST'),
-(26, '2022-08-11 22:34:30', '2022-08-11 22:34:30', 3, 96, '0', 'Рус', '456465@naul.ru', '321321', 'dasdsa'),
-(27, '2022-08-20 14:56:51', '2022-08-20 14:56:51', 3, 66, '0', 'dsa', 'dasda@aaa.ru', '321321', '29 Kushbegi ST');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `order_items`
---
-
-CREATE TABLE `order_items` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `order_id` int(10) UNSIGNED NOT NULL,
-  `product_id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `price` float NOT NULL,
-  `qty_item` int(11) NOT NULL,
-  `sum_item` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `order_items`
---
-
-INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `name`, `price`, `qty_item`, `sum_item`) VALUES
-(1, 16, 2, 'Джинсы MR520 MR 227 20002 0115 29-34 р Синие', 56, 5, 280),
-(2, 16, 3, 'Блуза Mango 53005681-05 M Бежевая', 20, 1, 20),
-(3, 16, 6, 'Кардиган Levi\'s Icy Grey Heather M', 100, 1, 100),
-(4, 17, 2, 'Джинсы MR520 MR 227 20002 0115 29-34 р Синие', 56, 5, 280),
-(5, 17, 3, 'Блуза Mango 53005681-05 M Бежевая', 20, 5, 100),
-(6, 17, 6, 'Кардиган Levi\'s Icy Grey Heather M', 100, 1, 100),
-(7, 18, 2, 'Джинсы MR520 MR 227 20002 0115 29-34 р Синие', 56, 1, 56),
-(8, 18, 6, 'Кардиган Levi\'s Icy Grey Heather M', 100, 1, 100),
-(9, 18, 7, 'Кардиган ONLY ON 15102048 M Black Tan/Partridg', 0, 1, 0),
-(10, 19, 5, 'Блузка Kira Plastinina 17-16-17453-SM-29 S', 0, 1, 0),
-(11, 19, 6, 'Кардиган Levi\'s Icy Grey Heather M', 100, 1, 100),
-(12, 20, 5, 'Блузка Kira Plastinina 17-16-17453-SM-29 S', 0, 1, 0),
-(13, 20, 6, 'Кардиган Levi\'s Icy Grey Heather M', 100, 1, 100),
-(14, 21, 5, 'Блузка Kira Plastinina 17-16-17453-SM-29 S', 0, 1, 0),
-(15, 21, 6, 'Кардиган Levi\'s Icy Grey Heather M', 100, 1, 100),
-(16, 22, 5, 'Блузка Kira Plastinina 17-16-17453-SM-29 S', 0, 1, 0),
-(17, 22, 6, 'Кардиган Levi\'s Icy Grey Heather M', 100, 1, 100),
-(18, 23, 5, 'Блузка Kira Plastinina 17-16-17453-SM-29 S', 0, 1, 0),
-(19, 23, 6, 'Кардиган Levi\'s Icy Grey Heather M', 100, 1, 100),
-(20, 24, 2, 'Джинсы MR520 MR 227 20002 0115 29-34 р Синие', 56, 1, 56),
-(21, 24, 4, 'Блуза Tom Tailor TT 20312490071 7610 M Зелёная', 70, 1, 70),
-(22, 25, 3, 'Блуза Mango 53005681-05 M Бежевая', 20, 1, 20),
-(23, 26, 2, 'Джинсы MR520 MR 227 20002 0115 29-34 р Синие', 56, 1, 56),
-(24, 26, 3, 'Блуза Mango 53005681-05 M Бежевая', 20, 2, 40),
-(25, 27, 1, 'Джинсы Garcia 244/32/856 28-32 р Серо-синие', 10, 1, 10),
-(26, 27, 2, 'Джинсы MR520 MR 227 20002 0115 29-34 р Синие', 56, 1, 56),
-(27, 27, 5, 'Блузка Kira Plastinina 17-16-17453-SM-29 S', 0, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -321,33 +191,9 @@ ALTER TABLE `category`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `contact`
---
-ALTER TABLE `contact`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Индексы таблицы `image`
 --
 ALTER TABLE `image`
-  ADD PRIMARY KEY (`id`);
-
---
--- Индексы таблицы `migration`
---
-ALTER TABLE `migration`
-  ADD PRIMARY KEY (`version`);
-
---
--- Индексы таблицы `order`
---
-ALTER TABLE `order`
-  ADD PRIMARY KEY (`id`);
-
---
--- Индексы таблицы `order_items`
---
-ALTER TABLE `order_items`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -373,28 +219,10 @@ ALTER TABLE `category`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
--- AUTO_INCREMENT для таблицы `contact`
---
-ALTER TABLE `contact`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
 -- AUTO_INCREMENT для таблицы `image`
 --
 ALTER TABLE `image`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
-
---
--- AUTO_INCREMENT для таблицы `order`
---
-ALTER TABLE `order`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
-
---
--- AUTO_INCREMENT для таблицы `order_items`
---
-ALTER TABLE `order_items`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT для таблицы `product`
